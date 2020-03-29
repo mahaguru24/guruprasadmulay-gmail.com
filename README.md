@@ -22,3 +22,9 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Netlify URL  
+- https://jovial-neumann-54aa26.netlify.com/
+
+### TODO
+- Add sentry for continuous error reporting
