@@ -1,3 +1,4 @@
+import _ from 'lodash'
 
 const state = {
 
@@ -11035,16 +11036,48 @@ const state = {
         }
     },
 
-    filters: []
+    filters: [],
+
+    selectedOptions: {
+        Suburb: 'all',
+    }
 }
 
 
 const getters = {
 
+    getAllFilters (state) {
+        return {
+            suburbs: _.uniq(_.map(state.mapData.features, (el) => el.properties.project.Suburb))
+        }
+    },
+
+    getSuburbOptions (state) {
+        let options = _.uniq(_.map(state.mapData.features, (el) => el.properties.project.Suburb))
+            .map(el => {return {value: el, text: el}})
+
+        options.unshift({ value: 'all' , text: 'All' })
+
+        return options
+    },
+
+    getFilteredCoordinates (state) {
+        let coordinates = state.mapData.features
+        if (state.selectedOptions.Suburb !== 'all') {
+            coordinates = state.mapData.features
+                .filter(el => el.properties.project.Suburb === state.selectedOptions.Suburb)
+        }
+
+        coordinates = _.map(coordinates, (el) => {return {title: el.properties.project.Title, coordinates: el.geometry.coordinates}})
+
+        return coordinates
+    }
 }
 
 const mutations = {
-
+    SET_SELECTED_STATE (state, value) {
+      state.selectedOptions.Suburb = value
+    }
 }
 
 const actions = {
