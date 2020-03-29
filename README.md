@@ -28,3 +28,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### TODO
 - Add sentry for continuous error reporting
+- Add test cases
